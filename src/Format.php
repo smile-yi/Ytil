@@ -1,6 +1,6 @@
 <?php
 /**
- * Format.class.php
+ * Format.php
  * 格式检测工具
  * 
  * @author  王中艺 <wangzy_smile@qq.com>

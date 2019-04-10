@@ -1,9 +1,7 @@
-# PHPUtils
+<?php
 
-### PHP常用工具包
+require_once '../vendor/autoload.php';
 
-#### Http调用
-```
 use SmileYi\Utils\Http;
 use SmileYi\Utils\Exception;
 
@@ -56,33 +54,7 @@ try {
 }catch(Exception $e){
     echo "Errno:" . $e->getCode . " Error:" . $e->getMessage()."\n";
 }
-```
+    
+    
 
-#### 参数校验
-```
-use SmileYi\Utils\Format;
-
-# 邮箱
-$bool = Format::isEmail('haha@gmail.com');
-
-# 手机号
-$bool = Format::isMobile('188xxxxxxxx');
-
-# url
-$bool = Format::isUrl('http://www.github.com/');
-
-# 身份证号
-$bool = Format::isIdCard('1775443288743221234');
-
-# 整数
-$bool = Format::isInteger(1001);
-
-# json
-$bool = Format::isJson('{"name":"smileyi"}');
-
-# 用户名(6-16位数字+字母+_)
-$bool = Format::isUsername('smileyi');
-
-# 密码(6-20位数字+字母+_)
-$bool = Format::isPassword('haha1234');
-```
+    
