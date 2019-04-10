@@ -17,7 +17,7 @@ class Common {
      * @return  string           
      */
     static function md5($string){
-        return md5($string . config('app.salt'));
+        return md5($string . Config::get('common', 'salt'));
     }
 
     /**
@@ -51,8 +51,8 @@ class Common {
      * @param   $data
      * @return  $string
      */
-    static function encrypt($data){
-        $key  = config('app.salt');
+    static function encrypt($data, $key = false){
+        $key  = $key ?? Config::get('common', 'salt');
         $expire     = 0;
         $data = base64_encode($data);
         $x    = 0;
@@ -80,8 +80,8 @@ class Common {
      * @param   $data
      * @return  string
      */
-    static function decrypt($data){
-        $key  = config('app.salt');
+    static function decrypt($data, $key = false){
+        $key  = $key ?? Config::get('common', 'salt');
         $data   = str_replace(array('-','_'),array('+','/'),$data);
         $mod4   = strlen($data) % 4;
         if ($mod4) {
@@ -130,27 +130,6 @@ class Common {
         }
 
         return strtoupper(substr($string, $surplus));
-    }
-
-    /**
-     * 计算坐标距离
-     * @param  [type] $lat1 [description]
-     * @param  [type] $lng1 [description]
-     * @param  [type] $lat2 [description]
-     * @param  [type] $lng2 [description]
-     * @return [type]       [description]
-     */
-    static function reckonDistance($lat1, $lng1, $lat2, $lng2){
-        $pi     = 3.1415926535898;
-        $earthRadius    = 6378.137;
-        $radLat1 = $lat1 * ($pi / 180);
-        $radLat2 = $lat2 * ($pi / 180);
-        $a = $radLat1 - $radLat2;
-        $b = ($lng1 * ($pi / 180)) - ($lng2 * ($pi / 180));
-        $s = 2 * asin(sqrt(pow(sin($a/2),2) + cos($radLat1)*cos($radLat2)*pow(sin($b/2),2)));
-        $s = $s * $earthRadius;
-        $s = round($s * 10000) / 10000;
-        return round($s, 3);
     }
 
     /**

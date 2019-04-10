@@ -45,5 +45,8 @@ class Config {
 Config::set([
     'log' => [
         'dir' => dirname(__FILE__) . '/../log/',
-    ]
+    ],
+    'common' => [
+        'salt' => '4ckNt8GrgvqXYg1u',
+    ],
 ]);

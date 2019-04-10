@@ -1,8 +1,14 @@
 # PHPUtils
 
-### PHP常用工具包
+### PHP常用工具包(网络调用、参数校验)
 
-#### Http调用
+#### 安装方法
+```
+composer require smileyi/utils
+```
+
+#### 工具列表
+##### Http调用
 ```
 use SmileYi\Utils\Http;
 use SmileYi\Utils\Exception;
@@ -58,7 +64,7 @@ try {
 }
 ```
 
-#### 参数校验
+##### 参数校验
 ```
 use SmileYi\Utils\Format;
 
