@@ -7,7 +7,44 @@
 composer require smileyi/utils
 ```
 
+#### 基础配置
+```
+use SmileYi\Utils\Config;
+
+Config::set([
+    'log' => [
+        // 日志存储路径
+        'dir' => dirname(__FILE__) . '/../extra/log/',
+    ],
+    'common' => [
+        //加密盐值
+        'salt' => '4ckNt8GrgvqXYg1u',
+    ],
+    'base64' => [
+        // 编码表
+        // 'map' => 'OBrsYZabgQRSTUtu3JnoPDChijklWApqKLM6Evw7Ncde45mxGHIfXyz012FV89+/',
+        'map' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+    ],
+    'upload' => [
+        // 上传目录
+        'dir' => dirname(__FILE__) . '/../extra/upload/',
+        // 允许的文件类型
+        'exts' => ['jpg', 'png', 'jpeg'], // 不限制: ['*']
+        // 文件大小限制
+        'size' => 1024 * 1024 * 2,
+    ],
+])
+```
+
 #### 工具列表
+-  网络调用
+-  参数验证
+-  Base64编码
+-  加密解密
+-  文件上传
+-  日志写入
+
+#### 具体用法
 ##### Http调用
 ```
 use SmileYi\Utils\Http;
@@ -60,8 +97,54 @@ try {
     $result = Http::multi($multi);
     var_dump($result);
 }catch(Exception $e){
-    echo "Errno:" . $e->getCode . " Error:" . $e->getMessage()."\n";
+    echo "Errno:" . $e->getCode() . " Error:" . $e->getMessage()."\n";
 }
+```
+
+##### 日志写入
+```
+use SmileYi\Utils\Log;
+
+Log::getInstance()->put('user', ['nickname' => 'smileyi', 'sex' => 1]);
+```
+
+##### 常用工具
+```
+use SmileYi\Utils\Common;
+
+# 加密解密
+$t = 'hahaha';
+$dt = Common::encrypt($t);
+$et = Common::decrypt($dt);
+echo "secret text:" . $dt . "\n";
+echo "text:" . $et . "\n\n";
+
+# 耗时计算
+Common::exeTime('_start');
+sleep(0.1);
+Common::exeTime('_end');
+echo "Exe time is:" . Common::exeTime('_start', '_end') . "s\n\n";
+
+# 获取随机长度字符串
+echo "random string is:" . Common::randStr(10) . "\n\n";
+
+# 获取客户端IP
+echo "client ip is:" . Common::getClientIp() . "\n\n";
+```
+
+##### Base64编码解码
+```
+use SmileYi\Utils\Base64;
+
+$text = 'smileyi';
+
+# 编码
+$dt = Base64::encode($text);
+# 解码
+$et = Base64::decode($dt);
+
+echo "text base64 encode is:" . $dt . "\n";
+echo "text is:" . $et . "\n\n";
 ```
 
 ##### 参数校验

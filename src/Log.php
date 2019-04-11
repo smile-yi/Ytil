@@ -26,7 +26,7 @@ class Log {
 
     //构造
     function __construct(){
-        $this->dir = Config::get('log', 'dir') ?? dirname(__FILE__ . '/../log/');
+        $this->dir = Config::get('log.dir') ?? dirname(__FILE__ . '/../log/');
     }
 
     /**

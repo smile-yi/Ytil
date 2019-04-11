@@ -17,7 +17,7 @@ class Common {
      * @return  string           
      */
     static function md5($string){
-        return md5($string . Config::get('common', 'salt'));
+        return md5($string . Config::get('common.salt'));
     }
 
     /**
@@ -26,8 +26,11 @@ class Common {
      * @return  string or integer
      */
     static function getClientIp($isLong = false){
-        $ip     = $_SERVER['REMOTE_ADDR'];
-        return $isLong ? ip2long($ip) : $ip;
+        if (isset($_SERVER['REMOTE_ADDR'])){
+            return $isLong ? ip2long($ip) : $ip;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -52,7 +55,7 @@ class Common {
      * @return  $string
      */
     static function encrypt($data, $key = false){
-        $key  = $key ?? Config::get('common', 'salt');
+        $key  = $key ?? Config::get('common.salt');
         $expire     = 0;
         $data = base64_encode($data);
         $x    = 0;
@@ -81,7 +84,7 @@ class Common {
      * @return  string
      */
     static function decrypt($data, $key = false){
-        $key  = $key ?? Config::get('common', 'salt');
+        $key  = $key ?? Config::get('common.salt');
         $data   = str_replace(array('-','_'),array('+','/'),$data);
         $mod4   = strlen($data) % 4;
         if ($mod4) {

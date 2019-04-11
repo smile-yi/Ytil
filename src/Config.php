@@ -27,26 +27,41 @@ class Config {
      * @param   $keys
      * @return  $val [<description>]
      */
-    static function get(){
-        $args = func_get_args();
-        $config = self::$config;
-        foreach($args as $arg){
-            if(isset($config[$arg])){
-                $config = $config[$arg];
-            }else{
-                return null;
+    static function get($keys){
+        if (!$keys) {
+            return self::$config;
+        } else {
+            $keys = explode('.', $keys);
+            $config = self::$config;
+            foreach ($keys as $key) {
+                if (isset($config[$key])) {
+                    $config = $config[$key];
+                } else {
+                    return null;
+                }
             }
+
+            return $config;
         }
-        return $config;
     }
 }
 
 // 设置默认配置
 Config::set([
     'log' => [
-        'dir' => dirname(__FILE__) . '/../log/',
+        'dir' => dirname(__FILE__) . '/../extra/log/',
     ],
     'common' => [
         'salt' => '4ckNt8GrgvqXYg1u',
+    ],
+    'base64' => [
+        // 编码表
+        // 'map' => 'OBrsYZabgQRSTUtu3JnoPDChijklWApqKLM6Evw7Ncde45mxGHIfXyz012FV89+/',
+        'map' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+    ],
+    'upload' => [
+        'dir' => dirname(__FILE__) . '/../extra/upload/',
+        'exts' => ['jpg', 'png', 'jpeg'], // 不限制: ['*']
+        'size' => 1024 * 1024 * 2,
     ],
 ]);
