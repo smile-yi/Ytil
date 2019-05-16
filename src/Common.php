@@ -17,7 +17,7 @@ class Common {
      * @return  string           
      */
     static function md5($string){
-        return md5($string . Config::get('common.salt'));
+        return strtoupper(md5($string . Config::get('common.salt')));
     }
 
     /**
@@ -27,10 +27,33 @@ class Common {
      */
     static function getClientIp($isLong = false){
         if (isset($_SERVER['REMOTE_ADDR'])){
-            return $isLong ? ip2long($ip) : $ip;
+            return $isLong ? ip2long($_SERVER['REMOTE_ADDR']) : $_SERVER['REMOTE_ADDR'];
         } else {
             return null;
         }
+    }
+
+    /**
+     * 获取客户端header
+     * @param   $key 
+     * @return  array or string [<description>]
+     */
+    static $clientHeader = false;
+    static function getClientHeader($key = null) {
+        if (self::$clientHeader === false) {
+            foreach ($_SERVER as $k => $v) {
+                if (substr($k, 0, 5) == 'HTTP_') {
+                    $headerKey = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($k, 5)))));
+                    self::$clientHeader[$headerKey] = $v;
+                }
+            }
+        }
+
+        if ($key !== null) {
+            return self::$clientHeader[$key] ?? null;
+        }
+
+        return self::$clientHeader;
     }
 
     /**

@@ -3,6 +3,8 @@ require_once '../vendor/autoload.php';
 
 use SmileYi\Utils\Common;
 
+header('Content-type:text/plain');
+
 # 加密解密
 $t = 'hahaha';
 $dt = Common::encrypt($t);
@@ -21,3 +23,7 @@ echo "random string is:" . Common::randStr(10) . "\n\n";
 
 # 获取客户端IP
 echo "client ip is:" . Common::getClientIp() . "\n\n";
+
+# 获取客户端header
+echo "client header is: \n";
+var_dump(Common::getClientHeader('User-Agent'));  
