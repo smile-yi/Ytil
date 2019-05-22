@@ -17,28 +17,28 @@ class ArrTool {
      * @param   $columns 字段
      * @return  array [<description>]
      */
-    static function leach(array $array, array $columns, $withNone = false, $default = null){
-        $result     = [];
-        if(is_array(reset($array))){
-            foreach($array as $key => $val){
-                $result[$key]   = self::_leachAction($val, $columns, $withNone, $default);
+    static function leach(array $array, array $columns, $withNotExist = false, $default = ''){
+        $result = [];
+        if (is_array(reset($array))) {
+            foreach ($array as $key => $val) {
+                $result[$key] = self::_leachAction($val, $columns, $withNotExist, $default);
             }
-        }else{
-            $result     = self::_leachAction($array, $columns, $withNone, $default);
+        } else {
+            $result = self::_leachAction($array, $columns, $withNotExist, $default);
         }
 
         return $result;
     }
 
-    static private function _leachAction(array $array, array $columns, $withNone, $default){
-        $result     = [];
-        foreach($array as $key => $val){
-            foreach($columns as $column){
-                if(isset($array[$column]) && $array[$column] !== ''){
-                    $result[$column]    = $array[$column];
-                }else{
-                    if($withNone){
-                        $result[$column]    = $default;
+    static private function _leachAction(array $array, array $columns, $withNotExist, $default){
+        $result = [];
+        foreach ($array as $key => $val) {
+            foreach ($columns as $column) {
+                if (array_key_exists($column, $array)) {
+                    $result[$column] = $array[$column];
+                } else {
+                    if ($withNotExist) {
+                        $result[$column] = $default;
                     }
                 }
             }
@@ -55,14 +55,30 @@ class ArrTool {
     static function toText($array, $level = 0){
         $string = '';
         $tab = "    ";
-        foreach($array as $key => $val){
-            if(!is_array($val)){
+        foreach ($array as $key => $val) {
+            if (!is_array($val)) {
                 $string .= Common::multString($tab, $level).$key.": ".$val."\n";
-            }else{
+            } else {
                 $string .= Common::multString($tab, $level).$key.": \n".
                     self::toText($val, $level + 1);
             }
         }
         return $string;
+    }
+
+    /**
+     * 存在且为null
+     * @param   $array 
+     * @param   $keys 
+     * @return  boolean [<description>]
+     */
+    static function existNull($array, array $keys) {
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $array) && $array[$key] === null) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
