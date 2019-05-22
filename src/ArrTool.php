@@ -72,7 +72,8 @@ class ArrTool {
      * @param   $keys 
      * @return  boolean [<description>]
      */
-    static function existNull($array, array $keys) {
+    static function existNull($array, $keys) {
+        $keys = (array)$keys;
         foreach ($keys as $key) {
             if (array_key_exists($key, $array) && $array[$key] === null) {
                 return true;
