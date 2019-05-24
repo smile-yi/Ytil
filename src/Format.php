@@ -50,33 +50,53 @@ class Format {
     /**
      * 密码格式检测
      * @param   $password
-     * @param   $level 严格级别
      * @return  boolean
      */
-    static function isPassword($password, $level = 1){
-        if ($level == 1) {
-            return preg_match('/^[_A-z0-9]{6,20}$/', $password);
-        }
-        return preg_match('/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/', $password);
+    static function isPassword($password){
+        // return preg_match('/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/', $password);
+        return preg_match('/^[_A-z0-9]{6,20}$/', $password);
     }
 
     /**
      * 短信验证码格式检测
-     * @param   $verifyCode
-     * @param   $len 验证码长度
+     * @param   $smsCode
      * @return  boolean
      */
-    static function isVerifyCode($verifyCode, $len = 6){
-        return is_numeric($verifyCode) && strlen($verifyCode) == $len;
+    static function isSmsCode($smsCode){
+        return is_numeric($smsCode) && strlen($smsCode) == 6;
     }
+
+
+    const TINYINT = 'tiny';
+    const SMALLINT = 'small';
+    const INT = 'int';
+    const BININT = 'big';
 
     /**
      * 整数检测
      * @param   $int 
+     * @param   $size tiny、small、int、big
+     * @param   $unsign 是否无符号
      * @return  boolean [<description>]
      */
-    static function isInteger($int){
-        return preg_match('/^-{0,1}\d{1,15}$/', $int);
+    static function isInteger($int, $size = self::INT, $unsign = true){
+        if ($unsign && !preg_match('/^\d{0,12}$/', $int)) {
+            return false;
+        }
+        if (!$unsign && !preg_match('/^-{0,1}\d{1,12}$/', $int)) {
+            return false;
+        }
+
+        $abs = abs($int);
+        if ($size === self::TINYINT) {
+            return $abs < 256 / ($unsign ? 1 : 2);
+        } else if ($size === self::SMALLINT) {
+            return $abs < 65536 / ($unsign ? 1 : 2);
+        } else if ($size === self::INT) {
+            return $abs < 4294967296 / ($unsign ? 1 : 2);
+        }
+
+        return true;
     }
 
     /**

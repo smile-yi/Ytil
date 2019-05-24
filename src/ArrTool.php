@@ -73,6 +73,9 @@ class ArrTool {
      * @return  boolean [<description>]
      */
     static function existNull($array, $keys) {
+        //平铺多维数组
+        $array = static::dot($array);
+
         $keys = (array)$keys;
         foreach ($keys as $key) {
             if (array_key_exists($key, $array) && $array[$key] === null) {
@@ -81,5 +84,25 @@ class ArrTool {
         }
 
         return false;
+    }
+
+    /**
+     * 将多维数组平铺到一维数组中
+     * @param   $array
+     * @param   $prepend 嵌套使用
+     * @return  array
+     */
+    static function dot($array, $prepend = ''){
+        $results = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value) && ! empty($value)) {
+                $results = array_merge($results, static::dot($value, $prepend.$key.'.'));
+            } else {
+                $results[$prepend.$key] = $value;
+            }
+        }
+
+        return $results;
     }
 }
