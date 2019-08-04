@@ -1,5 +1,5 @@
 {
-    "name": "smileyi/Ytil",
+    "name": "smileyi/ytil",
     "type": "library",
     "require": {
         "php": ">=7.0"
