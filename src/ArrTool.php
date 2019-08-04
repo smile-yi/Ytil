@@ -17,33 +17,34 @@ class ArrTool {
      * @param   $columns 字段
      * @return  array [<description>]
      */
-    static function leach(array $array, array $columns, $withNotExist = false, $default = ''){
+    static function leach(array $array, array $columns, $withUnset = false, $default = null){
         $result = [];
-        if (is_array(reset($array))) {
-            foreach ($array as $key => $val) {
-                $result[$key] = self::_leachAction($val, $columns, $withNotExist, $default);
-            }
-        } else {
-            $result = self::_leachAction($array, $columns, $withNotExist, $default);
-        }
-
-        return $result;
-    }
-
-    static private function _leachAction(array $array, array $columns, $withNotExist, $default){
-        $result = [];
-        foreach ($array as $key => $val) {
-            foreach ($columns as $column) {
-                if (array_key_exists($column, $array)) {
-                    $result[$column] = $array[$column];
-                } else {
-                    if ($withNotExist) {
-                        $result[$column] = $default;
+        foreach($array as $key => $val){
+            foreach($columns as $column){
+                if(isset($array[$column])){
+                    $result[$column]    = $array[$column];
+                }else{
+                    if($withUnset){
+                        $result[$column]    = $default;
                     }
                 }
             }
         }
 
+        return $result;
+    }
+
+    /** 
+     * 过滤多维数组
+     * @param   $array 多维数组
+     * @param   $columns 字段
+     * @return  array
+     */
+    static function leachMulti(array $array, array $columns, $withUnset = false, $default = null) {
+        $result = [];
+        foreach ($array as $key => $val) {
+            $result[$key] = self::leach($val, $columns, $withUnset, $default);
+        }
         return $result;
     }
 
@@ -72,14 +73,22 @@ class ArrTool {
      * @param   $keys 
      * @return  boolean [<description>]
      */
-    static function existNull($array, $keys) {
+    static function existNone($array, $keys = []) {
         //平铺多维数组
         $array = static::dot($array);
 
-        $keys = (array)$keys;
-        foreach ($keys as $key) {
-            if (array_key_exists($key, $array) && $array[$key] === null) {
-                return true;
+        if (empty($keys)) {
+            foreach ($array as $val) {
+                if ($val === null || $val === '') {
+                    return true;
+                }
+            }
+        } else {
+            $keys = (array)$keys;
+            foreach ($keys as $key) {
+                if (array_key_exists($key, $array) && ($array[$key] === null || $array[$key] === '')) {
+                    return true;
+                }
             }
         }
 
