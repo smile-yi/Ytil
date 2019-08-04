@@ -4,12 +4,12 @@
 
 #### 安装方法
 ```
-composer require smileyi/utils
+composer require smileyi/ytil
 ```
 
 #### 基础配置
 ```
-use SmileYi\Utils\Config;
+use SmileYi\Ytil\Config;
 
 Config::set([
     'log' => [
@@ -47,8 +47,8 @@ Config::set([
 #### 具体用法
 ##### Http调用
 ```
-use SmileYi\Utils\Http;
-use SmileYi\Utils\Exception;
+use SmileYi\Ytil\Http;
+use SmileYi\Ytil\Exception;
 
 $url = 'http://192.144.150.100/api.php?method=get&task_id=1001';
 $header = [
@@ -103,14 +103,14 @@ try {
 
 ##### 日志写入
 ```
-use SmileYi\Utils\Log;
+use SmileYi\Ytil\Log;
 
 Log::getInstance()->put('user', ['nickname' => 'smileyi', 'sex' => 1]);
 ```
 
 ##### 常用工具
 ```
-use SmileYi\Utils\Common;
+use SmileYi\Ytil\Common;
 
 # 加密解密
 $t = 'hahaha';
@@ -134,7 +134,7 @@ echo "client ip is:" . Common::getClientIp() . "\n\n";
 
 ##### Base64编码解码
 ```
-use SmileYi\Utils\Base64;
+use SmileYi\Ytil\Base64;
 
 $text = 'smileyi';
 
@@ -149,7 +149,7 @@ echo "text is:" . $et . "\n\n";
 
 ##### 参数校验
 ```
-use SmileYi\Utils\Format;
+use SmileYi\Ytil\Format;
 
 # 邮箱
 $bool = Format::isEmail('haha@gmail.com');

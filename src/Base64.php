@@ -7,7 +7,7 @@
  * @date    2019-01-07 20:30:16
  */
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Base64 {
 

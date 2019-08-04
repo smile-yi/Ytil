@@ -11,7 +11,7 @@
 // $upload = new Upload();
 // $info = $upload->upload();
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Upload {
 

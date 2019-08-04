@@ -7,7 +7,7 @@
  * @date    2019-04-10 16:55:47
  */
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Exception extends \Exception {
 

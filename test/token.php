@@ -9,7 +9,7 @@
 
 require_once '../vendor/autoload.php';
 
-use SmileYi\Utils\Token;
+use SmileYi\Ytil\Token;
 
 $token = Token::create();
 echo "token is: ".$token."<br>";

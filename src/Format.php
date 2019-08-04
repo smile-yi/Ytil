@@ -7,7 +7,7 @@
  * @date    2017-08-01
  */
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Format {
 

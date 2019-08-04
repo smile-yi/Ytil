@@ -7,7 +7,7 @@
  * @date    2018-08-11 12:34:45
  */
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Http {
 

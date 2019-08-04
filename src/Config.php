@@ -7,7 +7,7 @@
  * @date    2019-04-10 16:28:01
  */
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Config {
 

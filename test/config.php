@@ -2,7 +2,7 @@
 
 require_once '../vendor/autoload.php';
 
-use SmileYi\Utils\Config;
+use SmileYi\Ytil\Config;
 
 $config = [
     'log' => [

@@ -2,10 +2,10 @@
 
 require_once '../vendor/autoload.php';
 
-use SmileYi\Utils\Format;
-use SmileYi\Utils\Config;
-use SmileYi\Utils\Log;
-use SmileYi\Utils\Http;
+use SmileYi\Ytil\Format;
+use SmileYi\Ytil\Config;
+use SmileYi\Ytil\Log;
+use SmileYi\Ytil\Http;
 
 // var_dump(Format::isEmail('wangzhongyi@qq.com'));
 

@@ -2,9 +2,9 @@
 
 require_once '../vendor/autoload.php';
 
-use SmileYi\Utils\Upload;
-use SmileYi\Utils\Common;
-use SmileYi\Utils\Exception;
+use SmileYi\Ytil\Upload;
+use SmileYi\Ytil\Common;
+use SmileYi\Ytil\Exception;
 
 ?>
 

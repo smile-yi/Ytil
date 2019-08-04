@@ -7,7 +7,7 @@
  * @date    2017-09-21
  */
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Log {
 

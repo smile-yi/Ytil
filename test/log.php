@@ -2,7 +2,7 @@
 
 require_once '../vendor/autoload.php';
 
-use SmileYi\Utils\Log;
+use SmileYi\Ytil\Log;
 
 Log::getInstance()->put('user', [
     'nickname' => 'smileyi', 

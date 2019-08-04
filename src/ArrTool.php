@@ -7,7 +7,7 @@
  * @date    2017-10-12
  **/
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class ArrTool {
 

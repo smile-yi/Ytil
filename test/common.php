@@ -1,7 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
 
-use SmileYi\Utils\Common;
+use SmileYi\Ytil\Common;
 
 header('Content-type:text/plain');
 

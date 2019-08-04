@@ -7,7 +7,7 @@
  * @date    2019-05-16 17:37:05
  */
 
-namespace SmileYi\Utils;
+namespace SmileYi\Ytil;
 
 class Token {
 

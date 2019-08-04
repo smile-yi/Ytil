@@ -2,7 +2,7 @@
 
 require_once '../vendor/autoload.php';
 
-use SmileYi\Utils\Base64;
+use SmileYi\Ytil\Base64;
 
 $text = 'smileyi';
 $dt = Base64::encode($text);
