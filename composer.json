@@ -1,5 +1,5 @@
 {
-    "name": "smileyi/utils",
+    "name": "smileyi/Ytil",
     "type": "library",
     "require": {
         "php": ">=7.0"
@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "SmileYi\\Utils\\": "src/"
+            "SmileYi\\Ytil\\": "src/"
         }
     }
 }
